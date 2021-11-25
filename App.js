@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, FlatList } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabase('productdb.db');
+const db = SQLite.openDatabase('product.db');
 
 export default function App() {
   const [food, setFood] = useState('');
@@ -58,18 +58,18 @@ export default function App() {
   return (
     <View style={styles.container}>
       <TextInput placeholder='Product' style={{marginTop: 30, fontSize: 18, width: 200, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(food) => setFood(food)}
+        onChangeText={(text) => setFood(text)}
         value={food}/>  
       <TextInput placeholder='Amount' style={{ marginTop: 5, marginBottom: 5,  fontSize:18, width: 200, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(amount) => setAmount(amount)}
+        onChangeText={(text) => setAmount(text)}
         value={amount}/>      
-      <Button onPress={saveItem} title="Save" /> 
+      <Button onPress={saveItem} title="Add" /> 
       <Text style={{marginTop: 30, fontSize: 20}}>Shopping list</Text>
       <FlatList 
         style={{marginLeft : "5%"}}
         keyExtractor={item => item.id.toString()} 
         renderItem={({item}) => <View style={styles.listcontainer}><Text style={{fontSize: 18}}>{item.food}, {item.amount}</Text>
-        <Text style={{fontSize: 18, color: '#0000ff'}} onPress={() => deleteItem(item.id)}> Done</Text></View>} 
+        <Text style={{fontSize: 18, color: '#0000ff'}} onPress={() => deleteItem(item.id)}> Bought</Text></View>} 
         data={products} 
         ItemSeparatorComponent={listSeparator} 
       />      
